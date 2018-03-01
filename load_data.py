@@ -11,26 +11,32 @@ import sklearn.metrics as metrics
 
 
 
-x = pd.read_csv("./data/train_x.csv", header=None)
-print("loaded x")
-y = pd.read_csv("./data/train_y.csv", header=None)
-print("loaded y")
+# x = pd.read_csv("./data/train_x.csv", header=None)
+# print("loaded x")
+# y = pd.read_csv("./data/train_y.csv", header=None)
+# print("loaded y")
 
-x = x.as_matrix()#.reshape(-1, 64, 64)
-print("x shape: {}".format(x.shape))
-y = y.as_matrix().ravel()
-print("y shape: {}".format(y.shape))
+# x = x.as_matrix()#.reshape(-1, 64, 64)
+# print("x shape: {}".format(x.shape))
+# y = y.as_matrix().ravel()
+# print("y shape: {}".format(y.shape))
 
-clf = DecisionTreeClassifier()
-clf = clf.fit(x, y)
+# clf = DecisionTreeClassifier()
+# clf = clf.fit(x, y)
 
-pickle.dump(clf, open("./models/decision_tree.sav", 'wb'))
+# pickle.dump(clf, open("./models/decision_tree.sav", 'wb'))
 
-print("fit logistic regression")
+# print("fit decision tree")
 
-y_pred = clf.predict(x)
-f1 = metrics.f1_score(y_true=y, y_pred=y_pred, average='micro')
+clf = pickle.load(open("./models/decision_tree.sav", 'rb'))
+test_x = pd.read_csv("./data/test_x.csv", header=None)
+test_x = test_x.as_matrix()
 
-print("calculated f1 measure")
+test_y = clf.predict(test_x)
+test_y = np.array(test_y, dtype="int")
 
-print(f1)
+data = np.array([[i,test_y[i]] for i in range(len(test_y))], dtype='int')
+
+with open("./predicted_data/decision_tree_y.csv", 'wb') as f:
+    f.write(b"Id,Label\n")
+    np.savetxt(f, data, fmt="%i", delimiter=',')
