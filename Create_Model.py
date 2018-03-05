@@ -23,7 +23,7 @@ def create_model(model_name):
     print("y shape: {}".format(y_train.shape))
     clf = clf.fit(x_train, y_train)
     print("data fitted")
-    pickle.dump(clf, "./models/{}.sav".format(), 'wb')
+    pickle.dump(clf, "./models/{}.sav".format(model_name), 'wb')
     print("pickled")
 
 model_list = ["KNeighborsClassifier", "RandomForestClassifier", "LogisticRegression", "SVC", "GaussianNB"]
