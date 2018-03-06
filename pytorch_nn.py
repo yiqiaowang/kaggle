@@ -1,5 +1,6 @@
 import torch
 from torch.autograd import Variable
+import pandas as pd
 
 BATCH_SIZE = 250
 INPUT_DIMENSION = 64*64
@@ -8,6 +9,9 @@ OUT_DIMENSION = 1
 
 x = pd.read_csv("./data/head_x.csv", header=None).as_matrix()
 y = pd.read_csv("./data/head_y.csv", header=None).as_matrix()
+
+x = Variable(torch.Tensor(x))
+y = Variable(torch.Tensor(y))
 
 
 model = torch.nn.Sequential(
