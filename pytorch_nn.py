@@ -31,6 +31,7 @@ for _ in range(num_steps):
     predicted_y = model(x)
     optimizer.zero_grad()
 
+    loss = loss_fn(predicted_y, y)
     loss.backward()
 
 loss = loss_function(predicted_y, y)
