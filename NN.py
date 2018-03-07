@@ -114,9 +114,11 @@ class NeuralNetwork():
         # FIXME: Currently rounding to nearest int due to numerical issues.
         #        Note: The conversion from float to int may be neccesary.
 
-        # TODO : Make output layer 10 nodes so we can properly
-        #        represent 10 classes
-        output = np.rint(subsequent_inputs).astype(int)
+        # output = subsequent_inputs.copy()
+        # output[output < 0.5] = 0
+        # output[output >= 0.5] = 1
+        output = subsequent_inputs.clip(0, 1).round().astype(int)
+        # output = np.rint(subsequent_inputs).astype(int)
         error = np.square(self.train_targets - subsequent_inputs).sum()
         score = accuracy_score(self.train_targets, output)
         print('Error: {}\nAccuracy: {}'.format(error, score))
