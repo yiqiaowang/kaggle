@@ -8,7 +8,7 @@ def convert_y(y):
     output = []
     for i in y:
         to_add = np.zeros(10, dtype='int')
-        to_add[int(i)-1] = 1
+        to_add[int(i)] = 1
         output.append(to_add)
     return np.array(output)
         
@@ -22,7 +22,7 @@ if __name__ == "__main__":
             'train_targets': convert_y(pd.read_csv("./data/head_y.csv", header=None).as_matrix()),
             'layer_dimentions': [64*64, 32*64, 1000, 500, 100, 10],
             'learning_rate': 0.005,
-            'iterations':  100
+            'iterations':  1000
         }
 
 
