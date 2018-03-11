@@ -1,23 +1,28 @@
 import numpy as np
-
-from sklearn.metrics import accuracy_score
+import tools
 
 class Layer():
     """
     Class that represents a neural network layer. 
+    In this case, only hidden layers and output layer
+    are considered. The input layer does not contain weights
+    and is therefore not utilized.
+
     Responsible for maintaining all internal state.
     """
 
     @staticmethod
     def sigmoid(x):
-        # FIXME: Numpy complains of overflow runtime expection in np.exp
-        return 1 / (1 + np.exp(-x))
-
+        return 1.0 / (1 + np.exp(-x))
+    
     @staticmethod
     def sigmoid_deriv(x):
-        return x * (1 - x)
+        sig_x = Layer.sigmoid(x)
+        return sig_x * (1 - sig_x)
 
     def __init__(self, input_dim, output_dim):
+        # Note that output_dim is equivalent to the number neurons
+        # in the layer.
         self.weights = np.random.randn(input_dim, output_dim)
         self.outputs = np.array([])
         self.deltas = np.array([])
@@ -39,6 +44,18 @@ class NeuralNetwork():
     Class that implements the feed forward Neural Network.
     Takes in a dictionary that specifies the parameters.
     """
+    @staticmethod
+    def encode_data(data):
+        output = []
+        for i in data:
+            to_add = np.zeros(10, dtype='int')
+            to_add[int(i)] = 1
+            output.append(to_add)
+        return np.array(output)
+
+    @staticmethod
+    def decode_data(data):
+        return np.apply_along_axis(np.argmax, 1, data)
 
     def __init__(self, params):
         # Initialize the hidden layers
@@ -55,8 +72,7 @@ class NeuralNetwork():
         
         # Store training data
         self.train_inputs = params['train_inputs']
-        self.train_targets = params['train_targets']
-
+        self.train_targets = NeuralNetwork.encode_data(params['train_targets'])
 
     def train(self):
         for iteration in range(self.iterations):
@@ -109,16 +125,14 @@ class NeuralNetwork():
         for layer in self.layers[1:]:
             subsequent_inputs = layer.compute_outputs(subsequent_inputs)
 
-        # Report performance metrics
+        return  NeuralNetwork.decode_data(subsequent_inputs)
 
-        # FIXME: Currently rounding to nearest int due to numerical issues.
-        #        Note: The conversion from float to int may be neccesary.
+    def export_weights(self):
+        return [layer.weights for layer in self.layers]
 
-        # output = subsequent_inputs.copy()
-        # output[output < 0.5] = 0
-        # output[output >= 0.5] = 1
-        output = subsequent_inputs.clip(0, 1).round().astype(int)
-        # output = np.rint(subsequent_inputs).astype(int)
-        error = np.square(self.train_targets - subsequent_inputs).sum()
-        score = accuracy_score(self.train_targets, output)
-        print('Error: {}\nAccuracy: {}'.format(error, score))
+    def load_weights(self, saved_weights):
+        if len(saved_weights) is not len(self.layers):
+            raise ValueError('Size of saved weights and layers do not match up')
+
+        for i in range(len(self.layers)):
+            self.layers[i].weights = saved_weights[i] 
