@@ -9,7 +9,6 @@ import torch.utils.data
 from sklearn.metrics import accuracy_score
 from time import time
 
-
 def convert_y(y):
     output = []
     for i in y:
@@ -17,7 +16,6 @@ def convert_y(y):
         to_add[int(i)] = 1
         output.append(to_add)
     return np.array(output)
-
 
 def convert_to_label(data):
     output = []
@@ -27,11 +25,11 @@ def convert_to_label(data):
 start = time()
 URL_ENDPOINT = "http://cs.mcgill.ca/~pbelan17/"
 
-data_y = np.loadtxt(URL_ENDPOINT+"train_y_20000.csv", delimiter=",")
-y_test = np.loadtxt(URL_ENDPOINT+"test_y_500.csv", delimiter=",")
+data_y = np.loadtxt(URL_ENDPOINT+"train_y_2000.csv", delimiter=",")
+y_test = np.loadtxt(URL_ENDPOINT+"test_y_2000.csv", delimiter=",")
 print("y loaded")
-data_x = np.loadtxt(URL_ENDPOINT+"train_x_20000.csv", delimiter=",")
-x_test = np.loadtxt(URL_ENDPOINT+"test_x_500.csv", delimiter=",")
+data_x = np.loadtxt(URL_ENDPOINT+"train_x_2000.csv", delimiter=",")
+x_test = np.loadtxt(URL_ENDPOINT+"test_x_2000.csv", delimiter=",")
 print(x_test.shape)
 print("x loaded")
 print(data_y.shape)
@@ -46,30 +44,30 @@ class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
 
-        filter_size = 5
-        conv_filters1 = 6
-        conv_filters2 = 16
-        hidden_layer1 = 5000
-        hidden_layer2 = 500
-        output_layer = 10
-        input_size = 64
-        stride1 = 1
-        stride2 = 1
+        self.filter_size = 5
+        self.conv_filters1 = 6
+        self.conv_filters2 = 16
+        self.hidden_layer1 = 5000
+        self.hidden_layer2 = 500
+        self.output_layer = 10
+        self.input_size = 64
+        self.stride1 = 1
+        self.stride2 = 1
 
-        hidden_layer0 = conv_filters2 * (input_size - 2*filter_size + 2)^2
-
-        self.conv1 = nn.Conv2d(1, conv_filters1, filter_size, stride = stride1)
+        self.hidden_layer0 = self.conv_filters2 * (self.input_size - 2*self.filter_size + 2)**2
+        self.conv1 = nn.Conv2d(1, self.conv_filters1, self.filter_size, stride = self.stride1)
         # self.pool = nn.MaxPool1d(2, 2) -> NOT USED AT THE MOMENT
-        self.conv2 = nn.Conv2d(conv_filters1, conv_filters2, filter_size, stride = stride2)
-        self.fc1 = nn.Linear(hidden_layer0 , hidden_layer1)
-        self.fc2 = nn.Linear(hidden_layer1, hidden_layer2)
-        self.fc3 = nn.Linear(hidden_layer2, output_layer)
+        self.conv2 = nn.Conv2d(self.conv_filters1, self.conv_filters2, self.filter_size, stride = self.stride2)
+        self.fc1 = nn.Linear(self.hidden_layer0 , self.hidden_layer1)
+        self.fc2 = nn.Linear(self.hidden_layer1, self.hidden_layer2)
+        self.fc3 = nn.Linear(self.hidden_layer2, self.output_layer)
 
     def forward(self, x):
-        x = self.conv1(x.view(-1,1,input_size,input_size))
+        x = self.conv1(x.view(-1,1,self.input_size,self.input_size))
         x = F.relu(x)
         x = F.relu(self.conv2(x))
-        x = x.view(-1, self.hidden_layer0)
+        print(x.shape)
+        x = x.view(-1,self.hidden_layer0)
         x = F.sigmoid(self.fc1(x))
         x = F.sigmoid(self.fc2(x))
         x = self.fc3(x)
