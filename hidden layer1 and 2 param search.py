@@ -9,6 +9,10 @@ import torch.utils.data
 from sklearn.metrics import accuracy_score
 from time import time
 
+
+CUDA = False
+
+
 def convert_y(y):
     output = []
     for i in y:
@@ -26,27 +30,30 @@ start = time()
 URL_ENDPOINT = "http://cs.mcgill.ca/~pbelan17/"
 
 data_y = np.loadtxt(URL_ENDPOINT+"train_y_30000.csv", delimiter=",")
-y_test = np.loadtxt(URL_ENDPOINT+"test_y_10000.csv", delimiter=",")
+
 print("y loaded")
 data_x = np.loadtxt(URL_ENDPOINT+"train_x_30000.csv", delimiter=",")
-x_test = np.loadtxt(URL_ENDPOINT+"test_x_10000.csv", delimiter=",")
+
 print("x loaded")
 x_train = torch.FloatTensor(data_x)
 y_train = torch.FloatTensor(convert_y(data_y))
-x_test = Variable(torch.FloatTensor(x_test).cuda())
+
 
 batch = 100
-num_epochs = 5
-hidden_layer1_range = np.array([10000, 9000, 8000, 7000, 6000, 5000, 4000, 3000, 2000])
-hidden_layer2_range = np.array([2000, 1800, 1600, 1400, 1200,1000,800, 600, 400, 200])
+num_epochs = 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+hidden_layer1_range = [10000, 9000, 8000, 7000, 6000, 5000, 4000, 3000, 2000]
+hidden_layer2_range = [2000, 1800, 1600, 1400, 1200,1000,800, 600, 400, 200]
+# hidden_layer1_range = [5000]
+# hidden_layer2_range = [200]
+
 accuracy_list = []
 #hidden_layer1 = 5000
 #hidden_layer2 = 500
 
 class Net(nn.Module):
-    def __init__(self):
+    def __init__(self, hidden_layer1, hidden_layer2):
         super(Net, self).__init__()
-
+        print("called super")
         self.filter_size = 5
         self.conv_filters1 = 6
         self.conv_filters2 = 16
@@ -77,18 +84,22 @@ criterion = nn.MSELoss()
 train = torch.utils.data.TensorDataset(x_train, y_train)
 trainloader = torch.utils.data.DataLoader(train, batch_size=batch, shuffle=True, num_workers=1)
 for hidden_layer1 in hidden_layer1_range:
-    hidden_layer1 = int(hidden_layer1)
     for hidden_layer2 in hidden_layer2_range:
-        hidden_layer2 = int(hidden_layer2)
-        net = Net().cuda()
+        print("About to train on hidden layer 1 =", hidden_layer1, " and hidden layer 2 =", hidden_layer2)
+        net = Net(hidden_layer1, hidden_layer2)
+        if CUDA:
+            net = net.cuda()
+        print("created net")
         optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
         for epoch in range(num_epochs):  # loop over the dataset multiple times
-
             running_loss = 0.0
             for i, (inputs, labels) in enumerate(trainloader):
 
                 # wrap them in Variable
-                inputs, labels = Variable(inputs.cuda()), Variable(labels.cuda())
+                if CUDA:
+                    inputs = inputs.cuda()
+                    labels = labels.cuda()
+                inputs, labels = Variable(inputs), Variable(labels)
 
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -106,11 +117,19 @@ for hidden_layer1 in hidden_layer1_range:
                     print('[%d, %5d] loss: %.3f' % (epoch + 1, i + 1, running_loss / 100))
                     running_loss = 0.0
 
+        y_test = np.loadtxt(URL_ENDPOINT+"test_y_10000.csv", delimiter=",")
+        x_test = np.loadtxt(URL_ENDPOINT+"test_x_10000.csv", delimiter=",")
+        x_test = Variable(torch.FloatTensor(x_test))
+        if CUDA:
+            x_test = x_test.cuda()
         output = net(x_test)
-        output = output.data.cpu()
+        output = output.data
+        if CUDA:
+            output = output.cpu()
         output = convert_to_label(output.numpy())
         accuracy = accuracy_score(y_test, output)
         accuracy_list.append((accuracy, hidden_layer1, hidden_layer2))
+        print("with hidden layer 1 of {} and hidden layer 2 of {} gives a test accuracy of {}".format(hidden_layer1, hidden_layer2, accuracy))
 end = time()
 for i in accuracy_list:
     print(i)
