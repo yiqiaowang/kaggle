@@ -52,12 +52,14 @@ class Trainer:
         test_x = torch.FloatTensor(test_x.reshape(-1, 64, 64))
         if self.cuda:
             test_x = test_x.cuda()
-
+        test_x = Variable(test_x)
         output = self.model(test_x)
         output = output.data
         if self.cuda:
             output = output.cpu()
-        accuracy = accuracy_score(y_test, output)
+        output = output.numpy()
+        labels = Trainer.convert_to_labels(output)
+        accuracy = accuracy_score(test_y, labels)
         return accuracy
 
 
@@ -71,4 +73,9 @@ class Trainer:
         return torch.FloatTensor(output)
 
 
+    def convert_to_labels(ys):
+        output = []
+        for y in ys:
+            output.append(np.argmax(y))
+        return np.array(output, dtype='int')
 

@@ -12,7 +12,6 @@ hidden_layer2 = 2500
 class Net(nn.Module):
     def __init__(self, hidden_layer1, hidden_layer2):
         super(Net, self).__init__()
-        print("called super")
         self.filter_size = 5
         self.conv_filters1 = 6
         self.conv_filters2 = 16
