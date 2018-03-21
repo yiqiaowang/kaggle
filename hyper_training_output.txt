@@ -170,3 +170,40 @@ Took 1089.773421049118 seconds to train
 6 {'test_accuracy': 0.9158, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [750, 350, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
 [{'test_accuracy': 0.9174, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [750, 350, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}, {'test_accuracy': 0.917, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}, {'test_accuracy': 0.9168, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [256, 100, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}, {'test_accuracy': 0.9168, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [256, 100, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}, {'test_accuracy': 0.9158, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [750, 350, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}, {'test_accuracy': 0.9148, 'size_conv_layers': [16, 32, 64], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}]
 Took 2220.7332866191864 seconds to train
+
+1 {'test_accuracy': 0.9266, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+2 {'test_accuracy': 0.9246, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+3 {'test_accuracy': 0.9194, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.4, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+4 {'test_accuracy': 0.9186, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+5 {'test_accuracy': 0.9152, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+6 {'test_accuracy': 0.9138, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.4, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+7 {'test_accuracy': 0.9196, 'size_conv_layers': [10, 20, 30], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+8 {'test_accuracy': 0.9192, 'size_conv_layers': [10, 20, 30], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+9 {'test_accuracy': 0.9184, 'size_conv_layers': [10, 20, 30], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.4, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+10 {'test_accuracy': 0.9126, 'size_conv_layers': [10, 20, 30], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+11 {'test_accuracy': 0.9104, 'size_conv_layers': [10, 20, 30], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+12 {'test_accuracy': 0.9082, 'size_conv_layers': [10, 20, 30], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.4, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+13 {'test_accuracy': 0.9166, 'size_conv_layers': [8, 16, 24], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+14 {'test_accuracy': 0.9168, 'size_conv_layers': [8, 16, 24], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+15 {'test_accuracy': 0.9122, 'size_conv_layers': [8, 16, 24], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.4, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+16 {'test_accuracy': 0.9108, 'size_conv_layers': [8, 16, 24], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+17 {'test_accuracy': 0.905, 'size_conv_layers': [8, 16, 24], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.3, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
+18 {'test_accuracy': 0.9126, 'size_conv_layers': [8, 16, 24], 'size_conv_filters': [4, 4, 4], 'pool_size': 2, 'dropout_p': 0.4, 'size_hidden_layers': [512, 256, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 100, 'log': False}
+
