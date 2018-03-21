@@ -9,9 +9,9 @@ from torch.utils.data import TensorDataset, DataLoader
 
 
 class Trainer:
-    def __init__(self, model, learning_rate=1e-4, momentum=0.9, CUDA=False):
+    def __init__(self, model, learning_rate=1e-4, momentum=0.9, CUDA=True):
         self.model = model
-        self.criterion = nn.MSELoss()
+        self.criterion = nn.CrossEntropyLoss()
         self.learning_rate = learning_rate
         self.momentum = momentum
 
@@ -21,8 +21,8 @@ class Trainer:
             self.model = self.model.cuda()
 
 
-    def train(self, train_x, train_y, num_epochs, log=True, batch_size=100, num_steps_to_log=100):
-        training_data = torch.FloatTensor(train_x.reshape(-1, 64, 64))
+    def train(self, train_x, train_y, num_epochs=1, log=True, batch_size=100, num_steps_to_log=100, num_epochs_to_log=1):
+        training_data = torch.FloatTensor(train_x.reshape(-1, 1, 64, 64))
         training_y = Trainer.convert_to_y(train_y)
         dataset = TensorDataset(training_data, training_y)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=1)
@@ -43,13 +43,13 @@ class Trainer:
                 if log and batch % (num_steps_to_log - 1) == 0:
                     print("epoch {}, batch {}, loss {}".format(epoch+1, batch+1, loss.data[0]))
             
-            if log:
+            if log and epoch % (num_epochs_to_log - 1) == 0:
                 print("Finished epoch {} with loss of {}".format(epoch+1, loss.data[0]))
         return self.model
 
 
     def test(self, test_x, test_y):
-        test_x = torch.FloatTensor(test_x.reshape(-1, 64, 64))
+        test_x = torch.FloatTensor(test_x.reshape(-1, 1, 64, 64))
         if self.cuda:
             test_x = test_x.cuda()
         test_x = Variable(test_x)

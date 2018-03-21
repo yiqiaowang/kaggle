@@ -75,6 +75,6 @@ class Hyperparameter:
                     print(step, score_object)
                     step += 1
         
-        return results
+        return sorted(results, key=lambda score_object: score_object['test_accuracy'], reverse=True)
 
                 
