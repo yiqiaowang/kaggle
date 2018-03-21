@@ -14,11 +14,11 @@ if __name__ == "__main__":
     results.write('CV Results\n\n')
 
     # Load data
-    train_inputs = pd.read_csv("./data/nn_head_x.csv", header=None).as_matrix()
-    train_targets = pd.read_csv("./data/nn_head_y.csv", header=None).as_matrix()
+    train_inputs = pd.read_csv("./data/head_x.csv", header=None).as_matrix()
+    train_targets = pd.read_csv("./data/head_y.csv", header=None).as_matrix()
 
-    test_inputs = pd.read_csv("./data/nn_tail_x.csv", header=None).as_matrix()
-    test_targets = pd.read_csv("./data/nn_tail_y.csv", header=None).as_matrix()
+    test_inputs = pd.read_csv("./data/tail_x.csv", header=None).as_matrix()
+    test_targets = pd.read_csv("./data/tail_y.csv", header=None).as_matrix()
     
     # Specify hyper-parameter space
     layer_size = [50, 100, 250, 500, 1000, 2000]
