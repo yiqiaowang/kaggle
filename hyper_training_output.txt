@@ -236,3 +236,8 @@ Took 434.9131541252136 seconds to train
 1 {'test_accuracy': 0.925, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [1000, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 15, 'batch_size': 256, 'log': False}
 [{'test_accuracy': 0.925, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [1000, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 15, 'batch_size': 256, 'log': False}]
 Took 50.025890827178955 seconds to train
+
+
+1 {'test_accuracy': 0.9298, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [1500, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 15, 'batch_size': 256, 'log': False}
+[{'test_accuracy': 0.9298, 'size_conv_layers': [15, 30, 60], 'size_conv_filters': [5, 5, 5], 'pool_size': 2, 'dropout_p': 0.2, 'size_hidden_layers': [1500, 10], 'image_size': 36, 'learning_rate': 0.001, 'num_epochs': 15, 'batch_size': 256, 'log': False}]
+Took 50.399014472961426 seconds to train
