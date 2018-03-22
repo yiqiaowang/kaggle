@@ -13,15 +13,17 @@ x = x.astype(np.uint8)
 y = np.loadtxt(base_url + "nn_head_y.csv", delimiter=',')
 y = y.astype(np.uint8)
 
-SIZE = 36
+SIZE = 32 
 
 from time import time
  
 def rotate_and_slice(rectangle, image):
     if rectangle[1][0] > rectangle[1][1]:
-        rotation_matrix = cv2.getRotationMatrix2D(center=rectangle[0], angle=rectangle[2]+90, scale=1)
+        # rotation_matrix = cv2.getRotationMatrix2D(center=rectangle[0], angle=rectangle[2]+90, scale=1)
+        rotation_matrix = cv2.getRotationMatrix2D(center=rectangle[0], angle=0, scale=1)
     else:
-        rotation_matrix = cv2.getRotationMatrix2D(center=rectangle[0], angle=rectangle[2], scale=1)
+        # rotation_matrix = cv2.getRotationMatrix2D(center=rectangle[0], angle=rectangle[2], scale=1)
+        rotation_matrix = cv2.getRotationMatrix2D(center=rectangle[0], angle=0, scale=1)
 
     new_size = image.shape[0]*3//2
     larger_image = np.zeros((new_size, new_size), dtype=np.uint8)
@@ -37,7 +39,7 @@ def rotate_and_slice(rectangle, image):
 def preprocess(x):
     x = x.reshape(-1, 64, 64)
     result = []
-    for t in range(990, len(x)):
+    for t in range(10):
         image = x[t]
 
         # plt.imshow(image, cmap='gray')
