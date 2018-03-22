@@ -5,6 +5,7 @@ Located in [SVC_model.py](https://github.com/yiqiaowang/kaggle-competition/blob/
 
 ### Fully Connected Feed-Forward Neural Network
 Class implementing the neural network located in [NN.py](https://github.com/yiqiaowang/kaggle-competition/blob/master/NN.py)
+
 Script that trains and predicts using the NeuralNet class [NNRunner.py](https://github.com/yiqiaowang/kaggle-competition/blob/master/NNRunner.py)
 
 ### Convolutional Neural Network
