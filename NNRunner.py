@@ -4,7 +4,7 @@ import sys
 import tools
 import datetime
 
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 from NN import NeuralNetwork as NN
 
 if __name__ == "__main__":
@@ -21,15 +21,15 @@ if __name__ == "__main__":
     test_targets = pd.read_csv("./data/tail_y.csv", header=None).as_matrix()
     
     # Specify hyper-parameter space
-    layer_size = [50, 100, 250, 500, 1000, 2000]
+    layer_size = [4096, 50, 10]
     layers = range(1, 2)
     layer_dimentions = [[64*64] + [x]*y + [10] for x in layer_size for y in layers] 
 
     #learning_rate = [0.001, 0.005, 0.01]
-    learning_rate = [x * 0.01 for x in range(1, 11)]
+    learning_rate = [0.01]
 
     #iterations = [100, 250, 500, 1000]
-    iterations = [500, 1000, 1500, 2000]
+    iterations = [2000]
 
     param_list = [
             {
@@ -53,9 +53,12 @@ if __name__ == "__main__":
         prediction = nn.predict(test_inputs)
         
         error = np.square(test_targets - prediction).sum()
-        score = accuracy_score(test_targets, prediction)
-        print('Error: {}\nAccuracy: {}'.format(error, score))
-        results.write('Error: {}\tAccuracy: {}\tModel: {}\n\n'.format(error, score, params))
+        accuracy = accuracy_score(test_targets, prediction, average='micro')
+        recall = recall_score(test_targets, prediction, average='micro')  
+        precision = precision_score(test_targets, prediction, average='micro') 
+        f1 = f1_score(test_targets, prediction, average='micro')
+        print('Error: {}\nAccuracy: {}\nRecall: {}\nPrecision: {}\nF1: {}\n\n'.format(error, accuracy, precision, f1))
+        results.write('Error: {}\nAccuracy: {}\nRecall: {}\nPrecision: {}\nF1: {}\n\n'.format(error, accuracy, precision, f1))
 
 
     results.close()
